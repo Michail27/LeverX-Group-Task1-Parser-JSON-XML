@@ -1,25 +1,23 @@
-from ReadJsonFile import ReadJson
-from UnionJsonFile import UnionJson
-from WriteFIle import WriterJson, WriterXml
+from read_json_file import JsonLoad
+from union_json_file import JsonUnion
+from write_fIle import JsonWriter, XmlWriter
 
 
+def main(students, rooms, format_out):
 
-def main(students, rooms, format_in):
-
-    students_dict = ReadJson().read_json(students)
-    rooms_dict = ReadJson().read_json(rooms)
-    dict_rums = UnionJson().result_dict(students_dict, rooms_dict)
-    if format_in == 'json':
-        WriterJson().write(dict_rums)
-    elif format_in == 'xml':
-        WriterXml().write(dict_rums)
-
+    students_dict = JsonLoad().load_json(students)
+    rooms_dict = JsonLoad().load_json(rooms)
+    dict_rums = JsonUnion().get_result_dict(students_dict, rooms_dict)
+    if format_out == 'json':
+        JsonWriter().write(dict_rums)
+    elif format_out == 'xml':
+        XmlWriter().write(dict_rums)
     else:
-        print('')
+        raise ValueError('This format is not supported')
 
 
 if __name__ == '__main__':
     rooms = "rooms.json"
     students = "students.json"
-    format_in = "json"
-    main(students, rooms, format_in)
+    format_out = "json"
+    main(students, rooms, format_out)

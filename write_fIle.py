@@ -11,13 +11,13 @@ class AbstractWriter(ABC):
         pass
 
 
-class WriterJson(AbstractWriter):
+class JsonWriter(AbstractWriter):
     def write(self, dict_rums):
         with open('answer.json', 'w') as f:
             f.write(json.dumps(dict_rums, indent=6))
 
 
-class WriterXml(AbstractWriter):
+class XmlWriter(AbstractWriter):
     def write(self, dict_rums):
         xml_doc = dicttoxml(dict_rums, custom_root='Rooms', attr_type=False).decode('utf-8')
         pars_xml = parseString(xml_doc)

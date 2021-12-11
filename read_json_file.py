@@ -2,14 +2,16 @@ import json
 from abc import ABC, abstractmethod
 
 
-class AbstractRid(ABC):
+class AbstractLoad(ABC):
+    @staticmethod
     @abstractmethod
-    def read_json(self, filename):
+    def load_json(filename):
         pass
 
 
-class ReadJson(AbstractRid):
-    def read_json(self, filename):
+class JsonLoad(AbstractLoad):
+    @staticmethod
+    def load_json(filename):
         with open(filename, 'r') as file:
             data = json.loads(file.read())
             return data
