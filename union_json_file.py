@@ -18,6 +18,4 @@ class JsonUnion(AbstractUnion):
             student_dict['id'] = student['id']
             student_dict['name'] = student['name']
             dict_rooms[student_room]['students'].append(student_dict)
-            # print(dict_rooms.values())
-
         return [*dict_rooms.values()]
