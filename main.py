@@ -18,18 +18,18 @@ def main():
     args = args_parsing()
     rooms = args.rooms_path
     students = args.students_path
-    format_out = args.out_format
+
+    format_out = {'json': JsonWriter(), 'xml': XmlWriter()}
 
     students_dict = JsonLoad().load_json(students)
     rooms_dict = JsonLoad().load_json(rooms)
     dict_rums = JsonUnion().get_result_dict(students_dict, rooms_dict)
-    if format_out == 'json':
-        JsonWriter().write(dict_rums)
-    elif format_out == 'xml':
-        XmlWriter().write(dict_rums)
-    else:
+    try:
+        format_out[args.out_format].write(dict_rums)
+    except KeyError:
         raise ValueError('This format is not supported')
 
 
 if __name__ == '__main__':
     main()
+ # python main.py D:\Tasks_LeverX_Group\Task1_parser_json_file\students.json  D:\Tasks_LeverX_Group\Task1_parser_json_file\rooms.json json
